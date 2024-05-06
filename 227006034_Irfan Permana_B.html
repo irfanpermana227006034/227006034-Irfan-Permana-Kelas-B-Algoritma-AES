@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption and Decryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #091e52;
+            color: #fff;
+        }
+        .container {
+            max-width: 700px;
+            max-height: 680px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #091e52;
+        }
+        h2 {
+            text-align: center;
+        }
+        textarea {
+            width: 97%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>AES Encryption and Decryption Test</h2>
+
+    <textarea id="plaintext" placeholder="Masukkan plaintext..."></textarea>
+
+    <button onclick="encrypt()">Enkripsi</button>
+    <br>
+
+    <textarea id="ciphertext" placeholder="Hasil Enkripsi..." readonly></textarea>
+
+    <textarea id="decryptedtext" placeholder="Hasil Dekripsi..." readonly></textarea>
+
+    <button onclick="decrypt()">Dekripsi</button>
+
+    <br>
+    <button onclick="resetFields()">Reset</button>
+
+    <div class="info">
+        <h3>Apa itu Algoritma Advanced Encryption Standar (AES)?</h3>
+        <p>Algoritma Advanced Encryption Standard (AES) adalah metode enkripsi yang kuat dan simetris yang digunakan untuk melindungi data dalam dunia digital. AES dianggap sebagai penerus dari algoritma Data Encryption Standard (DES) yang lebih lama.</p>
+        <p>Dikembangkan pada tahun 1997 oleh dua kriptografer, Joan Daemen dari Belgia dan Vincent Rijmen dari Belgia, AES diadopsi oleh Pemerintah Amerika Serikat sebagai standar enkripsi yang disetujui oleh Badan Keamanan Nasional (NSA) pada tahun 2001.</p>
+    </div>
+
+    <footer>
+        <p>© Irfan Permana</p>
+    </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    function encrypt() {
+        var plaintext = document.getElementById("plaintext").value;
+        var key = prompt("Masukan Key");
+        var ciphertext = CryptoJS.AES.encrypt(plaintext, key).toString();
+        document.getElementById("ciphertext").value = ciphertext;
+    }
+
+    function decrypt() {
+        var ciphertext = document.getElementById("ciphertext").value;
+        var key = prompt("Masukan Key");
+        var bytes = CryptoJS.AES.decrypt(ciphertext, key);
+        var decryptedtext = bytes.toString(CryptoJS.enc.Utf8);
+        document.getElementById("decryptedtext").value = decryptedtext;
+    }
+
+    function resetFields() {
+        document.getElementById("plaintext").value = "";
+        document.getElementById("ciphertext").value = "";
+        document.getElementById("decryptedtext").value = "";
+    }
+</script>
+
+</body>
+</html>
